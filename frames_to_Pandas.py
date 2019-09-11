@@ -1,5 +1,6 @@
 import os
 import itertools
+import math
 import tensorflow as tf
 import pandas as pd
 import numpy as np
@@ -13,10 +14,8 @@ def extract_frame_data(frame):
     }
   object_counts = {object_type_name(x.type): x.count for x in frame.context.stats.laser_object_counts}
   frame_data.update(object_counts)
-  
   object_count = collections.Counter([object_type_name(x.type) for x in frame.laser_labels])
   #print(object_count)
-  
   return frame_data
 
 def import_frames(path, FILENAMES):

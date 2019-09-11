@@ -5,6 +5,13 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import re
+import collections
+
+from waymo_open_dataset.utils import range_image_utils
+from waymo_open_dataset.utils import transform_utils
+from waymo_open_dataset.utils import frame_utils
+from waymo_open_dataset import dataset_pb2 as open_dataset
+from waymo_open_dataset import label_pb2
 
 def extract_frame_data(frame):
   frame_data = {                     

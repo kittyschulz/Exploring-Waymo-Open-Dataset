@@ -25,7 +25,8 @@ def extract_frame_data(frame):
   #print(object_count)
   return frame_data
 
-def import_frames(path, FILENAMES):
+def import_frames(path):
+  FILENAMES = get_tf_files(path)
   frame_df = pd.DataFrame()
   for file in FILENAMES:
     dataset = tf.data.TFRecordDataset(path+file, compression_type='')
@@ -40,12 +41,19 @@ def object_type_name(x):
   return label_pb2.Label.Type.Name(x)
 
 def get_tf_files(path):
-
-  files = []
+  FILENAMES = []
   # r=root, d=directories, f = files
   for r, d, f in os.walk(path):
     for file in f:
       if '.tfrecord' in file:
-        files.append(os.path.join(r, file))
-        
-  return files
+        FILENAMES.append(os.path.join(r, file))
+  return FILENAMES
+
+
+
+
+
+
+
+
+

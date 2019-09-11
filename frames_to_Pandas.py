@@ -36,7 +36,16 @@ def import_frames(path, FILENAMES):
       frame_data = extract_frame_data(frame)
       frame_df = frame_df.append(frame_data, ignore_index=True)
 
-#frame_df.head()
-
 def object_type_name(x):
   return label_pb2.Label.Type.Name(x)
+
+def get_tf_files(path):
+
+  files = []
+  # r=root, d=directories, f = files
+  for r, d, f in os.walk(path):
+    for file in f:
+      if '.tfrecord' in file:
+        files.append(os.path.join(r, file))
+        
+  return files

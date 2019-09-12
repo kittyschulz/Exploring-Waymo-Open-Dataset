@@ -45,8 +45,7 @@ def get_tf_files(path):
   # r=root, d=directories, f = files
   for r, d, f in os.walk(path):
     for file in f:
-      if '.tfrecord' in file:
-        FILENAMES.append(os.path.join(r, file))
+      FILENAMES.append(os.path.join(r, file))
   return FILENAMES
 
 

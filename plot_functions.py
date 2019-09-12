@@ -25,16 +25,46 @@ def plot_hist_counts(df, hist_column, bins=10):
 	plt.xlabel(hist_column_title)
 	plt.show;
 
-def plot_obj_pc(object_type, color='b', alpha=0.1):
-	ax = plt.axes()
+def getImage(path):
+    return OffsetImage(plt.imread(path))
 
-	xdata = object_type['location_x']
-	ydata = object_type['location_y']
-	ax.scatter(xdata, ydata, c=color, alpha=alpha)
+def plot_obj_pc(object_type, alpha=0.5):
+    
+    fig, ax = plt.subplots(figsize=(10,10))
+    
+    for each in object_type:
+        xdata = each['location_x']
+        ydata = each['location_y']
+        ax.scatter(xdata, ydata, alpha=alpha, s=5)
+        ax.legend(loc='best')
+    ax.legend(("Vehicle", "Pedestrian", "Cyclist"), loc='best')
+    x = 0
+    y = 0
+    ax.scatter(x, y) 
+    ax.set_title('Point Cloud of Object Types over 10,000 Instances')
+    ab = AnnotationBbox(getImage('waymo_top.png'), (x, y), frameon=False)
+    ax.add_artist(ab)
+    ax.axis('off')
 
-	waymo_y = 0
-	waymo_x = 0
-	ax.scatter(waymo_x, waymo_y, c='k');
+def plot_obj_pc_multi(object_type, alpha=0.25):
+    
+    fig, ax = plt.subplots(1, 3, figsize=(10,3))
+    
+    color = ['blue','orange','green']
+    labels=['Vehicle', 'Pedestrian', 'Cyclist']
+    
+    for i, each in enumerate(object_type):
+        xdata = each['location_x']
+        ydata = each['location_y']
+        ax[i].scatter(xdata, ydata, alpha=alpha,s=0.25, color=color[i])
+        ax[i].set_title(labels[i])
+        x = 0
+        y = 0
+        ax[i].scatter(x, y) 
+    
+        ab = AnnotationBbox(getImage('waymo_top.png'), (x, y), frameon=False)
+        ax[i].add_artist(ab)
+        ax[i].axis('off')
 
 def plot_subgroup_hist(df, subs):
     num_subs = len(subs)

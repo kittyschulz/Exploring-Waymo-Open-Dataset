@@ -17,3 +17,12 @@ from waymo_open_dataset.utils import range_image_utils
 from waymo_open_dataset.utils import transform_utils
 from waymo_open_dataset.utils import  frame_utils
 from waymo_open_dataset import dataset_pb2 as open_dataset
+
+path = 'some_path/path'
+FILENAMES = [list of filenames]
+for file in FILENAMES:
+	dataset = tf.data.TFRecordDataset(path+file, compression_type='')
+	for data in dataset:
+		frame = open_dataset.Frame()
+		frame.ParseFromString(bytearray(data.numpy()))
+		

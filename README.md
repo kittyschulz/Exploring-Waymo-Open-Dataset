@@ -109,33 +109,28 @@ As Waymo expands to more cities, it will be intersting to see how the distributi
 
 ### Object Instance Data
 
-Each Object instance is categorized by its label class and has attributes of its bounding box dimensions, location in respect to the Waymo Car, and heading in respect to the Waymo Car. We added another column, Distance, which represented the distance of an object instance from the Waymo Car in the X-Y plane. 
-
-<center>
-
-Table 2: Five-Row Sample of Object Instance DataFrame
-
-|        | category   |   dimension_height |   dimension_length |   dimension_width |    heading |   location_x |   location_y |   location_z |   distance |
-|-------:|:-----------|-------------------:|-------------------:|------------------:|-----------:|-------------:|-------------:|-------------:|-----------:|
-| 242552 | vehicle    |               1.99 |          4.51771   |          1.91201  |  88.7551   |    30.7989   |    -16.1863  |     1.15742  |   34.7932  |
-| 321844 | pedestrian |               1.89 |          1.39697   |          1.0365   | 173.218    |    -9.0511   |      8.4543  |     1.30128  |   12.3854  |
-| 348903 | vehicle    |               1.76 |          4.66344   |          2.01356  |   0.676945 |    -0.608897 |     -6.17788 |     0.709428 |    6.20781 |
-| 462878 | cyclist    |               1.43 |          1.43591   |          0.777628 | 175.428    |    -2.84022  |     -4.73699 |     0.812319 |    5.52322 |
-| 311470 | sign       |               0.61 |          0.0736391 |          0.485803 |  -2.6006   |     0.63274  |     30.1758  |     2.67239  |   30.1824  |
-
-</center>
+Each Object instance is categorized by its label class and has attributes of its bounding box dimensions, location in respect to the Waymo Car, and heading in respect to the Waymo Car. We added another column, Distance, which represented the distance of an object instance from the Waymo Car in the X-Y plane. The a sample of the DataFrame containing the object instance data is shown in Table 2.  
 
 To visualize the distribution of object instances by class around the Waymo Car, we plotted individual object instances by their X- and Y-location with a Waymo Car centered at a point (0,0) in the X-Y plane, as shown in Figure 3 below.
 
 <center>
+
 ![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](plots/scatter_plot_lidar.png)
+
 </center>
 
 This scatter plot contains a total of approximately 38,000 object instances. Of these instances, 25,000 are Vehicle Class objects, 10,000 are Pedestrian Class objects, and 2,629 are Cyclist Class objects. The number of object instances was chosen based on the approximate proportion of each Object Class. 
 
 As we discussed in 'Scene Data,' the Cyclist Class object is a relatively rare occurance, with the majority of frames containing no cyclists. Out of the approximately 500,000 object instances extracted from the 8,000 frame sample, only 2,629 Cyclist Class object instances were labeled. For this reason, *all* cyclist instances have been plotted in Figure 3, unlike Vehicle and Pedestrian Classes which have a small sample displayed in the map.
 
-Although we can begin to percieve  
+From the scatter plot, we can begin to percieve trends in the location of object instances. Vehicle and Pedestrian Class objects seem to concentrate along the path of the Waymo Car. To better understand the locations of instances for each class, we plot a sample of approximately 3,000 instances per class in Figure 4.
+
+<center>
+
+![Figure 3: Scatter Plot of Object Instance Location for Each Mobile Object Class](plots/3_scatter_plot_lidar.png)
+
+</center>
+
 
 ## Hypothesis Testing
 

@@ -16,15 +16,16 @@
 
 This work serves to perform a high-level exploratory analysis of the labeled 3D data. Our goal is to better understand the data gathered by the Waymo self-driving cars by analyzing 3D labels and testing three (3) simple hypotheses about object distributions. 
 
-A major focus of this analysis was on visualizing the distribution of object and frame attributes. We have also explored the relationship between environmental factors, such as location, weather, and time of day, and the distribution and amount of object types in each scene. Finally, we inspected the position of objects in respect to the Waymo car using the 3D coordinates of each bounding box and their headings. 
+A major focus of this analysis was on visualizing the distribution of object instance and scene attributes. We have also explored the relationship between scene attributes, such as location, weather, and time of day, and the distribution and amount of object instances in each scene. Finally, we examined the position of objects in respect to the Waymo car using the 3D coordinates of each instance bounding box and their headings. 
 
 Ultimately, this work presents and tests three (3) hypotheses based on observations from visualization and analysis of the 3D label data:
 
-1. The majority of Vehicle class object instances have headings which lie either **parallel** or **orthogonal** to the Waymo Car. 
+1. Vehicle class objects are wider and longer than Pedestrian class objects.
 
 2. The headings Vehicle class objects are more likely to lie either **parallel** or **orthogonal** to the Waymo Car than Pedestrian class objects. 
 
 3. Vehicle class objects are wider and longer than Pedestrian class objects.
+
 
 ## Motivation
 
@@ -78,6 +79,8 @@ Table 2: Five-Row Sample of Object Instance DataFrame
 We began our analysis on 1,000 frames and then scaled to a representative sample of 8,000 frames. Within these 8,000 frames were approximately 500,000 object instances. For the purposes of this EDA, it was not necessary to scale our analysis to the entire dataset, and choosing the smaller, representative sample saved time and memory.
 
 ### Scene Data
+
+[Jupyter Notebook for Scene Data]()
 
 The scene data we explored includes the attributes of weather, location, time of day, and object counts. We first vizualized the distribution of these attributes over the frames in a histogram.
 

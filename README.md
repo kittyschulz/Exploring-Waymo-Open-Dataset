@@ -137,11 +137,11 @@ From the scatter plot, we can begin to percieve trends in the location of object
 
 ## Hypothesis Testing
 
+Currently, the in-depth explanation of each Hypothesis Test is contained in the Jupyter Notebooks for Scene Attributes and Object Instances. 
+
 ## Conclusions
 
+Conclusions are currently self-contained in the Jupyter Notebooks.
+
 ## Next Steps
-
-
-
-
 

@@ -4,9 +4,11 @@
 
 %%fill in with presentaion and notes after complete
 
-[Waymo Open Dataset GitHub]()
+[Waymo Open Dataset GitHub](https://github.com/waymo-research/waymo-open-dataset)
 
-[Dataset Tutorial - Colab]()
+[Dataset Tutorial - Colab](https://colab.research.google.com/github/waymo-research/waymo-open-dataset/blob/r1.0/tutorial/tutorial.ipynb)
+
+[Dataset in Google Cloud (Must Request Access)](https://console.cloud.google.com/storage/browser/waymo_open_dataset_v_1_0_0)
 
 ## Abstract
 
@@ -18,11 +20,11 @@ A major focus of this analysis was on visualizing the distribution of object and
 
 Ultimately, this work presents three (3) hypotheses which serve to demonstrate similiarity of the scenes in this dataset to real-world traffic conditions:
 
-1. 
+1. The majority of Vehicle class object instances have headings which lie either **parallel** or **orthogonal** to the Waymo Car. 
 
-2.
+2. The headings Vehicle class objects are more likely to lie either **parallel** or **orthogonal** to the Waymo Car than Pedestrian class objects. 
 
-3. 
+3. Vehicle class objects are wider and longer than Pedestrian class objects.
 
 ## Motivation
 
@@ -34,32 +36,41 @@ I wanted to perform this exploratory analysis to better understand the data cont
 
 The data has been packaged into a total of forty (40) '\*.tar' files, and split into a training and validation set, which contain 32 and 8 files, respectively. The total size of the compressed files is approximately 1TB. 
 
-Each segment is stored in a TensorFlow Record. Within this record, [protocol buffers]() store the data for each frame in a language-agnostic way.
+Each segment is stored in a [TensorFlow Record](https://www.tensorflow.org/tutorials/load_data/tf_records). Within this record are [protocol buffers](https://developers.google.com/protocol-buffers/) for each segment. Protocol buffers seriealize data in a language-agnostic way, but share some similar features to Python dictionaries. 
 
-The files are access through a [Google Cloud bucket](link-to-cloud). Given the size of the data, we chose to begin the analysis on a small subset of the data, for a total of 1,000 frames, and then scale.
+The files are accessed through a [Google Cloud bucket](link-to-cloud). Given the size of the data, we chose to begin the analysis on a small subset of the data, for a total of 1,000 frames, and then scale.
 
-To collect these frames, we built a scalable pipline to unpack the compressed files, read the TensorFlow Records, and extract data from the protocol buffers of each frame into a Python dictionary. Each dictionary was then appended to a Pandas DataFrame for easy visualization and manipulation. 
+To collect these frames, we built a scalable pipline to download the compressed files to a virtual machine, unpack the compressed files in a bash script, read the TensorFlow Records in Python, and extract data from the protocol buffers of each frame into a Python dictionary. Each dictionary was then appended to a Pandas DataFrame for easy visualization and manipulation. 
 
-The pipeline consists of a bash script to download and unpack the tarballs and a Python script to extract data from protocol buffers to a dictionary and ultimately a Pandas dataframe. You can access the scripts for this process [here](link-to-scripts-in-github). Before running them you will need to request access to the Waymo Open Dataset storage bucket.
+You can access the scripts for the pipeline [here](link-to-scripts-in-github). Before running them you will need to request access to the Waymo Open Dataset storage bucket. A link to the bucket has been provided in the notes.
+
 
 ## Data Analysis
 
-A small subset of the data within each protocol buffer was selected for this analysis. The data was split into two (2) Pandas DataFrames. The first includes environmental data about each scene (i.e., weather, location, and time of day). The second DataFrame contains data about each object type and object instance (i.e., the object counts and the location and heading of each instance). Below is a portion of each Pandas DataFrame:
+The data was ultimately split into two (2) Pandas DataFrames: The first includes the attributes of each scene (i.e., weather, location, time of day, and object counts). The second DataFrame contains data about each object instance (i.e., the object counts and the location and heading of each instance). Below is a portion of each Pandas DataFrame:
 
 [INSERT SNIPPET OF PANDAS DF]
 
+We began our analysis on 1,000 frames and then scaled to a representative sample of 8,000 frames. Within these 8,000 frames were approximately 500,000 object instances. For the purposes of this EDA, it was not necessary to scale our analysis to the entire dataset, and choosing the smaller, representative sample saved time and memory.
+
 ### Scene Data
 
-The scene data we explored includes environmental data such as weather, location, and time of day. We first vizualized the distribution of attributes over the frames.
+The scene data we explored includes the attributes of weather, location, time of day, and object counts. We first vizualized the distribution of these attributes over the frames in a histogram.
 
-[ENVIRONMENT PLOTS]
+![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/location-time-weather.png)
 
-The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(a). Likely in large part to location, the distribution of we
+The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(a). Likely in large part to location, the weather is nearly always Sunny. Most scenes take place during the day, with only about 25 percent occuring at night or dawn/dusk combined. 
+
+The distribution of the object counts
 
 ### Object Data
 
 
+## Hypothesis Testing
 
+## Conclusions
+
+## Next Steps
 
 
 

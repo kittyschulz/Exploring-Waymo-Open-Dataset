@@ -57,7 +57,7 @@ We began our analysis on 1,000 frames and then scaled to a representative sample
 
 The scene data we explored includes the attributes of weather, location, time of day, and object counts. We first vizualized the distribution of these attributes over the frames in a histogram.
 
-![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/location-time-weather.png)
+![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/location.png)
 
 The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(a). Likely in large part to location, the weather is nearly always Sunny. Most scenes take place during the day, with only about 25 percent occuring at night or dawn/dusk combined. 
 

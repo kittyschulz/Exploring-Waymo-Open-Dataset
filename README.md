@@ -2,7 +2,7 @@
 
 ## Presentation and Notes
 
-%%fill in with presentaion and notes after complete
+[PDF Version of Presentation Slides](https://drive.google.com/open?id=1YPThwAAlBuYRVPOzDUBFXRnTufu760dC)
 
 [Waymo Open Dataset GitHub](https://github.com/waymo-research/waymo-open-dataset)
 
@@ -18,7 +18,7 @@ This work serves to perform a high-level exploratory analysis of the labeled 3D 
 
 A major focus of this analysis was on visualizing the distribution of object and frame attributes. We have also explored the relationship between environmental factors, such as location, weather, and time of day, and the distribution and amount of object types in each scene. Finally, we inspected the position of objects in respect to the Waymo car using the 3D coordinates of each bounding box and their headings. 
 
-Ultimately, this work presents three (3) hypotheses which serve to demonstrate similiarity of the scenes in this dataset to real-world traffic conditions:
+Ultimately, this work presents and tests three (3) hypotheses based on observations from visualization and analysis of the 3D label data:
 
 1. The majority of Vehicle class object instances have headings which lie either **parallel** or **orthogonal** to the Waymo Car. 
 
@@ -44,12 +44,13 @@ To collect these frames, we built a scalable pipline to download the compressed 
 
 You can access the scripts for the pipeline [here](link-to-scripts-in-github). Before running them you will need to request access to the Waymo Open Dataset storage bucket. A link to the bucket has been provided in the notes.
 
-
 ## Data Analysis
 
-The data was ultimately split into two (2) Pandas DataFrames: The first includes the attributes of each scene (i.e., weather, location, time of day, and object counts). The second DataFrame contains data about each object instance (i.e., the object counts and the location and heading of each instance). Below is a portion of each Pandas DataFrame:
+The data was ultimately split into two (2) Pandas DataFrames: The first includes the attributes of each scene (i.e., weather, location, time of day, and object counts). The second DataFrame contains data about each object instance (i.e., the object counts and the location and heading of each instance). 
 
-<center>
+Below is a sample of each Pandas DataFrame:
+
+<p align="center">
 
 Table 1: Five-Row Sample of Scene Attributes DataFrame
 
@@ -72,7 +73,7 @@ Table 2: Five-Row Sample of Object Instance DataFrame
 | 462878 | cyclist    |               1.43 |          1.43591   |          0.777628 | 175.428    |    -2.84022  |     -4.73699 |     0.812319 |    5.52322 |
 | 311470 | sign       |               0.61 |          0.0736391 |          0.485803 |  -2.6006   |     0.63274  |     30.1758  |     2.67239  |   30.1824  |
 
-</center>
+</p>
 
 We began our analysis on 1,000 frames and then scaled to a representative sample of 8,000 frames. Within these 8,000 frames were approximately 500,000 object instances. For the purposes of this EDA, it was not necessary to scale our analysis to the entire dataset, and choosing the smaller, representative sample saved time and memory.
 
@@ -90,7 +91,7 @@ The distribution of the object counts over out sample frames is as follows:
 
 We'll explore individual object instances further, but its important to first to understand how many objects of each class we can expect in a frame. From the histograms above, it appears that we may have many frames with Pedestrian and Cyclist coutns of zero and that vehicle class objects are the most numerous, with a mean somwhere around 30 instances per frame.
 
-<center>
+<p align="center">
 
 Table 1: Mean, Median, and Maximum Count of Instances per Frame for Object Classes
 
@@ -101,7 +102,7 @@ Table 1: Mean, Median, and Maximum Count of Instances per Frame for Object Class
 |    Cyclist   |   0  |    0   |  11 |
 |      All     |  45  |   33   | 234 |
 
-</center>
+</p>
 
 From the Mean, Median, and Maximum counts of the object class instances, we can see that Cyclist class objects are indeed most rare, with most frames containing no cyclists. Vehicle Class objects also have the highest *average* count, but in at least one frame there are more Pedestrian Class Objects than Vehicles!
 
@@ -113,11 +114,11 @@ Each Object instance is categorized by its label class and has attributes of its
 
 To visualize the distribution of object instances by class around the Waymo Car, we plotted individual object instances by their X- and Y-location with a Waymo Car centered at a point (0,0) in the X-Y plane, as shown in Figure 3 below.
 
-<center>
+<p align="center">
 
 ![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](plots/scatter_plot_lidar.png)
 
-</center>
+</p>
 
 This scatter plot contains a total of approximately 38,000 object instances. Of these instances, 25,000 are Vehicle Class objects, 10,000 are Pedestrian Class objects, and 2,629 are Cyclist Class objects. The number of object instances was chosen based on the approximate proportion of each Object Class. 
 
@@ -125,12 +126,11 @@ As we discussed in 'Scene Data,' the Cyclist Class object is a relatively rare o
 
 From the scatter plot, we can begin to percieve trends in the location of object instances. Vehicle and Pedestrian Class objects seem to concentrate along the path of the Waymo Car. To better understand the locations of instances for each class, we plot a sample of approximately 3,000 instances per class in Figure 4.
 
-<center>
+<p align="center">
 
-![Figure 3: Scatter Plot of Object Instance Location for Each Mobile Object Class](plots/3_scatter_plot_lidar.png)
+![Figure 4: Scatter Plot of Object Instance Location for Each Mobile Object Class](plots/3_scatter_plot_lidar.png)
 
-</center>
-
+</p>
 
 ## Hypothesis Testing
 

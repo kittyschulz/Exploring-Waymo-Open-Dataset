@@ -67,6 +67,8 @@ The distribution of the object counts over out sample frames is as follows:
 
 We'll explore individual object instances further, but its important to first to understand how many objects of each class we can expect in a frame. From the histograms above, it appears that we may have many frames with Pedestrian and Cyclist coutns of zero and that vehicle class objects are the most numerous, with a mean somwhere around 30 instances per frame.
 
+<center>
+
 Table 1: Mean, Median, and Maximum Count of Instances per Frame for Object Classes
 
 | Object Class | Mean | Median | Max |
@@ -76,14 +78,40 @@ Table 1: Mean, Median, and Maximum Count of Instances per Frame for Object Class
 |    Cyclist   |   0  |    0   |  11 |
 |      All     |  45  |   33   | 234 |
 
+</center>
+
 From the Mean, Median, and Maximum counts of the object class instances, we can see that Cyclist class objects are indeed most rare, with most frames containing no cyclists. Vehicle Class objects also have the highest *average* count, but in at least one frame there are more Pedestrian Class Objects than Vehicles!
 
 As Waymo expands to more cities, it will be intersting to see how the distribution of object instances change; if we went to Denver, would we see more Cyclist Class Objects? If we drove around New York City, could we see an increase in the number of pedestrians? And what would the highest object counts be in the most densly-populated cities?
 
-### Object Data
+### Object Instance Data
+
+Each Object instance is categorized by its label class and has attributes of its bounding box dimensions, location in respect to the Waymo Car, and heading in respect to the Waymo Car. We added another column, Distance, which represented the distance of an object instance from the Waymo Car in the X-Y plane. 
+
+<center>
+
+Table 2: Five-Row Sample of Object Instance DataFrame
+
+|        |   Unnamed: 0 | category   |   dimension_height |   dimension_length |   dimension_width |     heading |   location_x |   location_y |   location_z |   distance |
+|-------:|-------------:|:-----------|-------------------:|-------------------:|------------------:|------------:|-------------:|-------------:|-------------:|-----------:|
+| 366610 |       366610 | sign       |            0.29    |           0.086095 |          0.423585 |   52.469    |      28.9542 |   -5.91703   |     1.52375  |    29.5526 |
+| 383646 |       383646 | cyclist    |            1.85767 |           1.86036  |          0.848052 | -178.818    |     -71.4117 |    3.11161   |     0.688399 |    71.4794 |
+| 143031 |       143031 | vehicle    |            1.72    |           4.68309  |          2.05674  | -179.931    |     -50.3247 |    9.33449   |     0.242042 |    51.1831 |
+|  34582 |        34582 | vehicle    |            1.7362  |           4.79143  |          2.29481  |   -0.644106 |     -19.8787 |   -0.0800397 |     0.913102 |    19.8789 |
+| 330807 |       330807 | pedestrian |            1.76    |           0.630894 |          0.793462 |  -67.4362   |     -49.7111 |   -9.47951   |    -0.1582   |    50.6068 |
+
+</center>
+
+To visualize the distribution of object instances by class around the Waymo Car, we plotted individual object instances by their X- and Y-location with a Waymo Car centered at a point (0,0) in the X-Y plane, as shown in Figure 3 below.
+
+![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](plots/scatter_plot_lidar.png)
 
 
+This scatter plot contains a total of approximately 38,000 object instances. Of these instances, 25,000 are Vehicle Class objects, 10,000 are Pedestrian Class objects, and 2,629 are Cyclist Class objects. The number of object instances was chosen based on the approximate proportion of each Object Class. 
 
+As we discussed in 'Secne Data,' the Cyclist Class object is a relatively rare occurance, with the majority of frames containing no cyclists. Out of the approximately 500,000 object instances extracted from the 8,000 frame sample, only 2,629 Cyclist Class object instances were labeled. For this reason, *all* cyclist instances have been plotted in Figure 3, unlike Vehicle and Pedestrian Classes which have a small sample displayed in the map.
+
+Although we can begin to percieve  
 
 ## Hypothesis Testing
 

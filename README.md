@@ -28,7 +28,7 @@ Ultimately, this work presents three (3) hypotheses which serve to demonstrate s
 
 ## Motivation
 
-After working with the KITTI dataset as an undergraduate research assistant, I became interested in the discipline of computer vision and its applications to autonomous vehicles. Waymo's recent release of a large and (relatively) diverse open dataset provides a great opportunity to explore real-world 3D and 2D scenes for autonomous vehicles. 
+After working with the [KITTI benchmark suite](http://www.cvlibs.net/datasets/kitti/) as an undergraduate research assistant, I became interested in the discipline of computer vision and its applications to autonomous vehicles. Waymo's recent release of a large and (relatively) diverse open dataset provides a great opportunity to explore real-world 3D and 2D scenes for autonomous vehicles. 
 
 I wanted to perform this exploratory analysis to better understand the data contained in the Waymo Open Dataset, and to familiarize myself with the datastructures used by Google. I hope to further explore the Waymo dataset at a deeper level, including with future ML and AI projects. 
 
@@ -49,7 +49,30 @@ You can access the scripts for the pipeline [here](link-to-scripts-in-github). B
 
 The data was ultimately split into two (2) Pandas DataFrames: The first includes the attributes of each scene (i.e., weather, location, time of day, and object counts). The second DataFrame contains data about each object instance (i.e., the object counts and the location and heading of each instance). Below is a portion of each Pandas DataFrame:
 
-[INSERT SNIPPET OF PANDAS DF]
+<center>
+
+Table 1: Five-Row Sample of Scene Attributes DataFrame
+
+| Index |   cyclist_count | location       |   pedestrian_count |   sign_count | time_of_day   |   vehicle_count | weather   |   all_object_count |
+|-----:|-------------:|----------------:|:---------------|-------------------:|-------------:|:--------------|----------------:|:----------|-------------------:|
+| 1648 |               0 | location_other |                  5 |           24 | Day           |              26 | sunny     |                 31 |
+| 5214 |               0 | location_phx   |                  0 |            8 | Day           |               2 | sunny     |                  2 |
+| 4604 |               0 | location_sf    |                 51 |           16 | Day           |              19 | sunny     |                 70 |
+| 6204 |               2 | location_other |                  4 |           22 | Day           |              26 | sunny     |                 32 |
+| 2684 |               0 | location_other |                  0 |           14 | Day           |              16 | sunny     |                 16 |
+
+
+Table 2: Five-Row Sample of Object Instance DataFrame
+
+| Index | category   |   dimension_height |   dimension_length |   dimension_width |     heading |   location_x |   location_y |   location_z |   distance |
+|-------:|-------------:|:-----------|-------------------:|-------------------:|------------------:|------------:|-------------:|-------------:|-------------:|-----------:|
+| 366610 | sign       |            0.29    |           0.086095 |          0.423585 |   52.469    |      28.9542 |   -5.91703   |     1.52375  |    29.5526 |
+| 383646 | cyclist    |            1.85767 |           1.86036  |          0.848052 | -178.818    |     -71.4117 |    3.11161   |     0.688399 |    71.4794 |
+| 143031 | vehicle    |            1.72    |           4.68309  |          2.05674  | -179.931    |     -50.3247 |    9.33449   |     0.242042 |    51.1831 |
+|  34582 | vehicle    |            1.7362  |           4.79143  |          2.29481  |   -0.644106 |     -19.8787 |   -0.0800397 |     0.913102 |    19.8789 |
+| 330807 | pedestrian |            1.76    |           0.630894 |          0.793462 |  -67.4362   |     -49.7111 |   -9.47951   |    -0.1582   |    50.6068 |
+
+</center>
 
 We began our analysis on 1,000 frames and then scaled to a representative sample of 8,000 frames. Within these 8,000 frames were approximately 500,000 object instances. For the purposes of this EDA, it was not necessary to scale our analysis to the entire dataset, and choosing the smaller, representative sample saved time and memory.
 
@@ -92,24 +115,25 @@ Each Object instance is categorized by its label class and has attributes of its
 
 Table 2: Five-Row Sample of Object Instance DataFrame
 
-|        |   Unnamed: 0 | category   |   dimension_height |   dimension_length |   dimension_width |     heading |   location_x |   location_y |   location_z |   distance |
+| Index | category   |   dimension_height |   dimension_length |   dimension_width |     heading |   location_x |   location_y |   location_z |   distance |
 |-------:|-------------:|:-----------|-------------------:|-------------------:|------------------:|------------:|-------------:|-------------:|-------------:|-----------:|
-| 366610 |       366610 | sign       |            0.29    |           0.086095 |          0.423585 |   52.469    |      28.9542 |   -5.91703   |     1.52375  |    29.5526 |
-| 383646 |       383646 | cyclist    |            1.85767 |           1.86036  |          0.848052 | -178.818    |     -71.4117 |    3.11161   |     0.688399 |    71.4794 |
-| 143031 |       143031 | vehicle    |            1.72    |           4.68309  |          2.05674  | -179.931    |     -50.3247 |    9.33449   |     0.242042 |    51.1831 |
-|  34582 |        34582 | vehicle    |            1.7362  |           4.79143  |          2.29481  |   -0.644106 |     -19.8787 |   -0.0800397 |     0.913102 |    19.8789 |
-| 330807 |       330807 | pedestrian |            1.76    |           0.630894 |          0.793462 |  -67.4362   |     -49.7111 |   -9.47951   |    -0.1582   |    50.6068 |
+| 366610 | sign       |            0.29    |           0.086095 |          0.423585 |   52.469    |      28.9542 |   -5.91703   |     1.52375  |    29.5526 |
+| 383646 | cyclist    |            1.85767 |           1.86036  |          0.848052 | -178.818    |     -71.4117 |    3.11161   |     0.688399 |    71.4794 |
+| 143031 | vehicle    |            1.72    |           4.68309  |          2.05674  | -179.931    |     -50.3247 |    9.33449   |     0.242042 |    51.1831 |
+|  34582 | vehicle    |            1.7362  |           4.79143  |          2.29481  |   -0.644106 |     -19.8787 |   -0.0800397 |     0.913102 |    19.8789 |
+| 330807 | pedestrian |            1.76    |           0.630894 |          0.793462 |  -67.4362   |     -49.7111 |   -9.47951   |    -0.1582   |    50.6068 |
 
 </center>
 
 To visualize the distribution of object instances by class around the Waymo Car, we plotted individual object instances by their X- and Y-location with a Waymo Car centered at a point (0,0) in the X-Y plane, as shown in Figure 3 below.
 
+<center>
 ![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](plots/scatter_plot_lidar.png)
-
+</center>
 
 This scatter plot contains a total of approximately 38,000 object instances. Of these instances, 25,000 are Vehicle Class objects, 10,000 are Pedestrian Class objects, and 2,629 are Cyclist Class objects. The number of object instances was chosen based on the approximate proportion of each Object Class. 
 
-As we discussed in 'Secne Data,' the Cyclist Class object is a relatively rare occurance, with the majority of frames containing no cyclists. Out of the approximately 500,000 object instances extracted from the 8,000 frame sample, only 2,629 Cyclist Class object instances were labeled. For this reason, *all* cyclist instances have been plotted in Figure 3, unlike Vehicle and Pedestrian Classes which have a small sample displayed in the map.
+As we discussed in 'Scene Data,' the Cyclist Class object is a relatively rare occurance, with the majority of frames containing no cyclists. Out of the approximately 500,000 object instances extracted from the 8,000 frame sample, only 2,629 Cyclist Class object instances were labeled. For this reason, *all* cyclist instances have been plotted in Figure 3, unlike Vehicle and Pedestrian Classes which have a small sample displayed in the map.
 
 Although we can begin to percieve  
 

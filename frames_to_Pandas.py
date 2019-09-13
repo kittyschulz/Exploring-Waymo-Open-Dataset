@@ -42,7 +42,7 @@ def object_type_name(x):
 
 def get_tf_files(path):
   FILENAMES = []
-  # r=root, d=directories, f = files
+  # r=root, d=directories, f=files
   for r, d, f in os.walk(path):
     for file in f:
       FILENAMES.append(os.path.join(r, file))

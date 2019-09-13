@@ -57,13 +57,32 @@ We began our analysis on 1,000 frames and then scaled to a representative sample
 
 The scene data we explored includes the attributes of weather, location, time of day, and object counts. We first vizualized the distribution of these attributes over the frames in a histogram.
 
-![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/location.png)
+![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/time-location-weather.png)
 
-The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(a). Likely in large part to location, the weather is nearly always Sunny. Most scenes take place during the day, with only about 25 percent occuring at night or dawn/dusk combined. 
+The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(b). Likely in large part to location, the weather is nearly always Sunny. Most scenes take place during the day, with only about 25 percent occuring at night or dawn/dusk combined. 
 
-The distribution of the object counts
+The distribution of the object counts over out sample frames is as follows:
+
+![Figure 2: Histogram of Object Class Counts per Frame](plots/object_dist.png)
+
+We'll explore individual object instances further, but its important to first to understand how many objects of each class we can expect in a frame. From the histograms above, it appears that we may have many frames with Pedestrian and Cyclist coutns of zero and that vehicle class objects are the most numerous, with a mean somwhere around 30 instances per frame.
+
+Table 1: Mean, Median, and Maximum Count of Instances per Frame for Object Classes
+
+| Object Class | Mean | Median | Max |
+|:------------:|:----:|:------:|:---:|
+|    Vehicle   |  30  |   27   | 163 |
+|  Pedestrian  |  14  |   27   | 192 |
+|    Cyclist   |   0  |    0   |  11 |
+|      All     |  45  |   33   | 234 |
+
+From the Mean, Median, and Maximum counts of the object class instances, we can see that Cyclist class objects are indeed most rare, with most frames containing no cyclists. Vehicle Class objects also have the highest *average* count, but in at least one frame there are more Pedestrian Class Objects than Vehicles!
+
+As Waymo expands to more cities, it will be intersting to see how the distribution of object instances change; if we went to Denver, would we see more Cyclist Class Objects? If we drove around New York City, could we see an increase in the number of pedestrians? And what would the highest object counts be in the most densly-populated cities?
 
 ### Object Data
+
+
 
 
 ## Hypothesis Testing

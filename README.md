@@ -1,4 +1,4 @@
-# Exploratory Analysis of the Waymo Open Dataset
+# Exploring the Waymo Open Dataset
 
 ## Presentation and Notes
 

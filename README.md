@@ -80,17 +80,17 @@ We began our analysis on 1,000 frames and then scaled to a representative sample
 
 ### Scene Data
 
-[Jupyter Notebook for Scene Data]()
+[Jupyter Notebook for Scene Data](notebooks/Waymo-Frame-EDA.ipynb)
 
 The scene data we explored includes the attributes of weather, location, time of day, and object counts. We first vizualized the distribution of these attributes over the frames in a histogram.
 
-![Figure 1 (a), (b), (c): Histogram of Scene Attributes](plots/time-location-weather.png)
+![Figure 1 (a), (b), (c): Histogram of Scene Attributes](visualizations/time-location-weather.png)
 
 The majority of the data were gathered in either Pheonix or San Francisco, as shown in Figure 1(b). Likely in large part to location, the weather is nearly always Sunny. Most scenes take place during the day, with only about 25 percent occuring at night or dawn/dusk combined. 
 
 The distribution of the object counts over out sample frames is as follows:
 
-![Figure 2: Histogram of Object Class Counts per Frame](plots/object_dist.png)
+![Figure 2: Histogram of Object Class Counts per Frame](visualizations/object_dist.png)
 
 We'll explore individual object instances further, but its important to first to understand how many objects of each class we can expect in a frame. From the histograms above, it appears that we may have many frames with Pedestrian and Cyclist coutns of zero and that vehicle class objects are the most numerous, with a mean somwhere around 30 instances per frame.
 
@@ -119,7 +119,7 @@ To visualize the distribution of object instances by class around the Waymo Car,
 
 <p align="center">
 
-![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](plots/scatter_plot_lidar.png)
+![Figure 3: Scatter Plot of Object Instance Location in Respect to Waymo Car](visualizations/scatter_plot_lidar.png)
 
 </p>
 
@@ -131,7 +131,7 @@ From the scatter plot, we can begin to percieve trends in the location of object
 
 <p align="center">
 
-![Figure 4: Scatter Plot of Object Instance Location for Each Mobile Object Class](plots/3_scatter_plot_lidar.png)
+![Figure 4: Scatter Plot of Object Instance Location for Each Mobile Object Class](visualizations/3_scatter_plot_lidar.png)
 
 </p>
 

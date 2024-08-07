@@ -26,13 +26,6 @@ Ultimately, this work presents and tests three (3) hypotheses based on observati
 
 3. Vehicle class objects are wider and longer than Pedestrian class objects.
 
-
-## Motivation
-
-After working with the [KITTI benchmark suite](http://www.cvlibs.net/datasets/kitti/) as an undergraduate research assistant, I became interested in the discipline of computer vision and its applications to autonomous vehicles. Waymo's recent release of a large and (relatively) diverse open dataset provides a great opportunity to explore real-world 3D and 2D scenes for autonomous vehicles. 
-
-I wanted to perform this exploratory analysis to better understand the data contained in the Waymo Open Dataset, and to familiarize myself with the datastructures used by Google. I hope to further explore the Waymo dataset at a deeper level, including with future ML and AI projects. 
-
 ## Data Collection
 
 The data has been packaged into a total of forty (40) '\*.tar' files, and split into a training and validation set, which contain 32 and 8 files, respectively. The total size of the compressed files is approximately 1TB. 
